@@ -1,12 +1,39 @@
-// A small seeded random number generator (mulberry32): the same seed gives the same game,
-// which is what makes the screenshot scenes repeatable.
+// A small seeded random source (xorshift128+ with a splitmix seed): the same seed gives the
+// same city, the same traffic and the same screenshot scenes, which is what makes the game
+// repeatable. Extra helpers live beside the raw stream so callers read intent, not bit math.
 
 export function createRandom(seed) {
-  let a = seed | 0;
-  return function random() {
-    a = (a + 0x6d2b79f5) | 0;
-    let t = Math.imul(a ^ (a >>> 15), 1 | a);
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  let s0 = (seed ^ 0x9e3779b9) >>> 0;
+  let s1 = (Math.imul(seed ^ 0x85ebca6b, 0xc2b2ae35) ^ 0x27d4eb2f) >>> 0;
+  if (s0 === 0 && s1 === 0) s1 = 0x9e3779b9;
+  function next() {
+    let x = s0;
+    const y = s1;
+    s0 = y;
+    x ^= (x << 23) >>> 0;
+    x ^= x >>> 17;
+    x ^= y ^ (y >>> 26);
+    s1 = x >>> 0;
+    return ((s1 + y) >>> 0) / 4294967296;
+  }
+  return {
+    /** A float in [0, 1). */
+    next,
+    /** An integer in [min, max]. */
+    int(min, max) {
+      return min + Math.floor(next() * (max - min + 1));
+    },
+    /** A float in [min, max). */
+    range(min, max) {
+      return min + next() * (max - min);
+    },
+    /** One element of `list`, uniformly. */
+    pick(list) {
+      return list[Math.floor(next() * list.length)];
+    },
+    /** True with probability `p`. */
+    chance(p) {
+      return next() < p;
+    },
   };
 }
