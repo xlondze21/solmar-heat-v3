@@ -31,6 +31,15 @@ export function createRandom(seed) {
     pick(list) {
       return list[Math.floor(next() * list.length)];
     },
+    /** A shuffled copy of `list` (Fisher-Yates, same seed, same order). */
+    shuffle(list) {
+      const out = list.slice();
+      for (let i = out.length - 1; i > 0; i -= 1) {
+        const j = Math.floor(next() * (i + 1));
+        [out[i], out[j]] = [out[j], out[i]];
+      }
+      return out;
+    },
     /** True with probability `p`. */
     chance(p) {
       return next() < p;

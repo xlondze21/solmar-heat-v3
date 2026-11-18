@@ -6,6 +6,10 @@
 
 Solmar Heat is a 2D top-down open-world crime game in the spirit of GTA 6: explore the sun-soaked coastal city of Solmar on foot, by car, by helicopter and by boat. Steal cars, outrun the police through 1–5 wanted stars, dodge the police helicopter (or steal the flyable one from the hospital helipad), run 10 story missions for Rico — marina smuggling, a fish-market heist, a tide-runner beach race at low tide, an old-town dash at dusk and a casino finale — and build street REP. The city lives on its own: traffic AI with lights and queues, pedestrians, rival-gang territories, a tide that opens the beach road, a full day/night cycle where noon heat makes the police more aggressive, in-car radio with three synthesized stations, a garage to buy and keep cars, a paint shop, a safehouse that clears your wanted level, and a localStorage save. Everything is hand-built from scratch: original city, characters, story, art and synthesized WebAudio sound — no Rockstar content, no network requests, no libraries.
 
+## Controls
+
+WASD / arrows — move or drive · E — enter / steal a car, board the boat or helicopter · Space — handbrake · F — punch · G — shoot · R — radio station · C — paint shop · P — pause · 1/2/3 — buy at the garage
+
 ## Run it
 
 ```sh

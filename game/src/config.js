@@ -48,6 +48,9 @@ export const WANTED = {
   bustRange: 52,
 };
 
+// A cruiser's ram: hp per second it takes off the player's car, and px per second it shoves it.
+export const POLICE = { ram: 26 };
+
 export const MISSIONS = { repPerMission: 10 };
 
 export const PRICES = { ammoBox: 50, ammoCount: 12, paintJob: 100, boatFare: 0 };

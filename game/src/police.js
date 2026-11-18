@@ -3,7 +3,7 @@
 // police helicopter that arrives at three stars, circles overhead with a spotlight and calls
 // in more ground units. Pure state updates: no drawing, no browser.
 
-import { CAR, DAY, HELI, ROAD_X, ROAD_Y, SPOTS, WANTED, WORLD } from './config.js';
+import { CAR, DAY, HELI, POLICE, ROAD_X, ROAD_Y, SPOTS, WANTED, WORLD } from './config.js';
 import { angleDiff, clamp, dist, nearestNode, nodeNeighbours, nodePos } from './util.js';
 
 function spawnCruiser(state, random) {
@@ -115,10 +115,10 @@ export function updatePolice(state, city, dt, random, fx) {
       if (p.mode === 'car') {
         const pv = state.vehicles.find((v) => v.id === p.vehicleId);
         if (pv && pv.hp > 0) {
-          pv.hp -= 26 * dt;
+          pv.hp -= POLICE.ram * dt;
           // Shove the player's car sideways.
-          pv.x += Math.cos(cop.angle) * 26 * dt;
-          pv.y += Math.sin(cop.angle) * 26 * dt;
+          pv.x += Math.cos(cop.angle) * POLICE.ram * dt;
+          pv.y += Math.sin(cop.angle) * POLICE.ram * dt;
         }
       } else if (p.mode === 'foot' && p.invuln <= 0) {
         p.hp -= 12;

@@ -37,3 +37,4 @@ const dossier = buildDossier(outDir, {
   game_path_max_bytes: 1000,
 });
 writeFileSync(join(outDir, 'dossier.json'), dossier);
+console.log(`Solmar Heat entry written to ${outDir} (game/ + screenshots/ + dossier.json).`);

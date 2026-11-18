@@ -222,7 +222,7 @@ export function createWorld(seed, audio) {
   function seedWorld() {
     loadGame();
     // Parked cars around the city, one of each stealable kind near the start.
-    const kinds = ['sedan', 'taxi', 'truck', 'sports'];
+    const kinds = random.shuffle(['sedan', 'taxi', 'truck', 'sports']);
     for (let k = 0; k < 10; k += 1) {
       const i = random.int(1, 10);
       const j = random.int(1, 10);
